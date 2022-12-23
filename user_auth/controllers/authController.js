@@ -5,6 +5,7 @@ const usersDB = {
 const bcrypt = require('bcrypt');
 
 const handleLogin = async (req, res) => {
+    // server should up with 'npm run dev' in order to auth/login the newly created users
     const { user, pwd } = req.body;
     if (!user || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
     const foundUser = usersDB.users.find(person => person.username === user);
