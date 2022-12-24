@@ -51,6 +51,11 @@ app.use('/', require('./routes/root'));
 //     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 // });
 
+// This route just to test and it's not bound to .. 
+// ..any authentication, authorization or any database connection
+// Ex: testapi/, /testapi/todos, testapi/todos/:id,
+app.use('/testapi', require('./routes/test'));
+
 // Ex: register/, /register/subreg, register/*,
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
