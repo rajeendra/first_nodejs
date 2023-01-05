@@ -21,12 +21,13 @@ const handleLogin = async (req, res) => {
                 }
             },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '60s' }
+            { expiresIn: '10s' }
         );
         const refreshToken = jwt.sign(
             { "username": foundUser.username },
             process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '1d' }
+            //{ expiresIn: '1d' }
+            { expiresIn: '40s' }
         );
         // Saving refreshToken with current user
         foundUser.refreshToken = refreshToken;
@@ -37,7 +38,9 @@ const handleLogin = async (req, res) => {
         // Creates Secure Cookie with refresh token
         // res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
         // Set secure: false for local testing with Thunder client
-        res.cookie('jwt', refreshToken, { httpOnly: true, secure: false, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+        //res.cookie('jwt', refreshToken, { httpOnly: true, secure: false, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+        // For brwser testing
+        res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 01 * 01 * 40 * 1000 });
 
         // Send authorization roles and access token to user
         res.json({ roles, accessToken });
